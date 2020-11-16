@@ -32,4 +32,21 @@ class NoteController extends Controller
         $notes = Note::all();
         return view('notes.index', ['notes' => $notes]);
     }
+
+    public function show()
+    {
+        $note = Note::first();
+        return view('notes.show', ['note' => $note]);
+    }
+
+    public function edit()
+    {
+        
+    }
+
+    public function update()
+    {
+        $note = Note::first();
+        return view('notes.update', ['note' => $note]);
+    }
 }
