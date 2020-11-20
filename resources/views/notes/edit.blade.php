@@ -8,8 +8,9 @@
                     <div class="card-header">{{ __('Note') }}</div>
 
                     <div class="card-body">
-                        <form method="PATCH" action="{{ route('notes_update') }}">
+                        <form method="POST" action="{{ route('notes_update',['note' => $note]) }}">
                             @csrf
+                            @method('PATCH')
 
                             <div class="form-group row">
                                 <label for="title"
@@ -66,5 +67,18 @@
                                 </div>
                             </div>
 
+                        </form>
+<br>
+                        <form method="POST" action="{{ route('notes_delete',['note' => $note]) }}">
+                            @csrf
+                            @method('DELETE')
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-danger">
+                                    {{ __('Delete') }}
+                                </button>
+                            </div>
+                        </div>
                         </form>
 @endsection

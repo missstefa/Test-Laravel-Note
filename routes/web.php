@@ -34,3 +34,5 @@ Route::get('/notes/{note}',[\App\Http\Controllers\NoteController::class, 'show']
 Route::get('/notes/{note}/edit', [\App\Http\Controllers\NoteController::class, 'edit'])->name('notes_edit');
 
 Route::patch('/notes/{note}',[\App\Http\Controllers\NoteController::class, 'update'])->name('notes_update');
+
+Route::delete('/notes/{note}',[\App\Http\Controllers\NoteController::class, 'delete'])->name('notes_delete');

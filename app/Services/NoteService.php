@@ -10,4 +10,10 @@ class NoteService
     {
         Note::create($data);
     }
+
+    public function update(array $data, Note $note): void
+    {
+        $note->fill($data);
+        $note->save();
+    }
 }
