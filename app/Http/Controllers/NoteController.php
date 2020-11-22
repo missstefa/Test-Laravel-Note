@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NoteStoreRequest;
+use App\Http\Requests\NoteUpdateRequest;
 use App\Models\Note;
 use App\Services\NoteService;
 
@@ -31,5 +32,26 @@ class NoteController extends Controller
     {
         $notes = Note::all();
         return view('notes.index', ['notes' => $notes]);
+    }
+
+    public function show(Note $note)
+    {
+        return view('notes.show', ['note' => $note]);
+    }
+
+    public function edit(Note $note)
+    {
+        return view('notes.edit', ['note' => $note]);
+    }
+
+    public function update(Note $note, NoteUpdateRequest $request)
+    {
+        $this->noteService->update($request->validated(), $note);
+        return view('notes.edit', ['note' => $note]);
+    }
+    public function delete(Note $note)
+    {
+        $note->delete();
+        return redirect('notes');
     }
 }
