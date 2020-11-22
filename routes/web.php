@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 
 
-
+Route::middleware('auth:web')->group(function () {
 
 Route::get('/notes', [\App\Http\Controllers\NoteController::class, 'index'])->name('notes_index');
 
@@ -36,3 +36,4 @@ Route::get('/notes/{note}/edit', [\App\Http\Controllers\NoteController::class, '
 Route::patch('/notes/{note}',[\App\Http\Controllers\NoteController::class, 'update'])->name('notes_update');
 
 Route::delete('/notes/{note}',[\App\Http\Controllers\NoteController::class, 'delete'])->name('notes_delete');
+});
