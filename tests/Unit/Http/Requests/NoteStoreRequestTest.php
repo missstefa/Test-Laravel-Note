@@ -88,30 +88,10 @@ class NoteStoreRequestTest extends TestCase
         ];
         $request = new NoteStoreRequest();
         foreach ($dates as $data) {
-
-
             $validator = Validator::make($data, $request->rules());
 
             $this->assertTrue($validator->passes());
         }
     }
-
-
-//    /** @test */
-//    public function test()
-//    {
-//        $response = $this->actingAs($this->user)
-//            ->postJson(
-//                route('products.store'),
-//                [
-//                    'price' => $this->faker->numberBetween(1, 50),
-//                ]
-//            );
-//
-//        $response > assertStatus(
-//            Response::HTTP_UNPROCESSABLE_ENTITY
-//        );
-//
-//        $response->assertJsonValidationErrors('title');
-//    }
 }
+
