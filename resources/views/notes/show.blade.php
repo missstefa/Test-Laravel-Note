@@ -36,7 +36,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" onclick="return false;"
                                        {{ ($note->is_important == 1 ? ' checked' : '') }}
-                                       name="important" type="checkbox" id="important">
+                                       name="is_important" type="checkbox" id="important">
                             </div>
                         </div>
                         <div class="form-group row mb-0">
