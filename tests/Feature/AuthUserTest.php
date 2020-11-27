@@ -18,6 +18,8 @@ class AuthUserTest extends TestCase
         $response = $this->get('/notes');
 
         $response->assertStatus(Response::HTTP_FOUND);
+
+        $response->assertRedirect(route('login'));
     }
 
     public function test_cant_create_note_without_auth()
@@ -25,6 +27,8 @@ class AuthUserTest extends TestCase
         $response = $this->post('/notes', []);
 
         $response->assertStatus(Response::HTTP_FOUND);
+
+        $response->assertRedirect(route('login'));
     }
 
     public function test_can_show_all_notes_with_auth()

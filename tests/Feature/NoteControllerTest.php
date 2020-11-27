@@ -15,21 +15,23 @@ class NoteControllerTest extends TestCase
     {
         parent::__construct($name, $data, $dataName);
 
-        $this->user = User::factory()->create();
+        $this->createApplication();
+
+        $this->user = User::factory()->make();
     }
-    
+
     public function test_deleting_note()
     {
         $note = Note::factory()->create();
 
         $this->actingAs($this->user)->deleteJson(route('notes_delete', ['note' => $note]))->assertStatus(
             Response::HTTP_FOUND
-        );
+        )->assertRedirect(route('notes_index'));
 
         $this->assertDeleted($note);
     }
 
-    public function test_creating_note()
+    public function test_storing_note()
     {
         $fields = [
             'title' => $this->faker->title,
@@ -37,10 +39,48 @@ class NoteControllerTest extends TestCase
             'is_important' => $this->faker->boolean,
         ];
 
-        $this->actingAs($this->user)->postJson(route('notes_store'), $fields);
+        $this->actingAs($this->user)->postJson(route('notes_store'), $fields)->assertRedirect(route('notes_index'));
 
 
-        $this->assertDatabaseHas(with(new Note)->getTable(), $fields);
+        $this->assertDatabaseHas(with(new Note())->getTable(), $fields);
+    }
+
+    public function test_updating_note()
+    {
+        $note = Note::factory()->create();
+
+        $fields = [
+            'title' => $this->faker->title,
+            'body' => $this->faker->text,
+            'is_important' => $this->faker->boolean,
+        ];
+
+        $oldFields = [
+            'title' => $note->title,
+            'body' => $note->body,
+            'is_important' => $note->is_important
+        ];
+
+        $this->actingAs($this->user)->patchJson(route('notes_update', ['note' => $note]), $fields);
+
+        $this->assertDatabaseMissing(with(new Note())->getTable(), $oldFields);
+
+        $this->assertDatabaseHas(with(new Note())->getTable(), $fields);
+    }
+
+    public function test_showing_note()
+    {
+        $note = Note::factory()->create();
+
+        $response = $this->actingAs($this->user)->getJson(route('notes_show', ['note' => $note]));
+
+        $response->assertViewIs('notes.show');
+
+        $response->assertViewHas('note', $note);
+
+        $response->assertSee('is_important');
+        $response->assertSee('title');
+        $response->assertSee('body');
     }
 
 }
