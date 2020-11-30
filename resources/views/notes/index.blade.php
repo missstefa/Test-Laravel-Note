@@ -1,23 +1,37 @@
 @extends('layouts.app')
 
 @section('content')
+    <table class="table">
+        <caption style="caption-side:top; text-align:center">Список заметок</caption>
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Important</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+            <tbody>
+            @foreach ($notes as $note)
+            <tr>
+                <td>{{ $note->id }}</td>
+                <td>{{ $note->title }}</td>
+                <td>{{ $note->is_important }}</td>
+                <td>
+                    <form method="GET" action="{{ route('notes_show',['note' => $note->id]) }}">
+                        @csrf
+                        <button type="submit" class="btn btn-primary">
+                            {{ __('Show') }}
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+            </tbody>
+    </table>
 
-    <ul class="list-group">
-        @foreach ($notes as $note)
-            <li class="list-group-item">{{ $note->title }}</li>
-            <div>
-                <form method="GET" action="{{ route('notes_show',['note' => $note]) }}">
-                    @csrf
-                    <div class="form-group row mb-0">
-                        <div class="col-md-6 offset-md-4">
-                            <button type="submit" class="btn btn-primary">
-                                {{ __('Show') }}
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        @endforeach
-    </ul>
+    <div class="d-flex justify-content-center">
+        {{ $notes->links('vendor.pagination.bootstrap-4') }}
+    </div>
 
 @endsection

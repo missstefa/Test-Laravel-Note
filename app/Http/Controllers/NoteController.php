@@ -6,6 +6,7 @@ use App\Http\Requests\NoteStoreRequest;
 use App\Http\Requests\NoteUpdateRequest;
 use App\Models\Note;
 use App\Services\NoteService;
+use Illuminate\Support\Facades\DB;
 
 class NoteController extends Controller
 {
@@ -30,7 +31,8 @@ class NoteController extends Controller
 
     public function index()
     {
-        $notes = Note::all();
+        $notes = Note::paginate(5);
+
         return view('notes.index', ['notes' => $notes]);
     }
 
