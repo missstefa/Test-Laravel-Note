@@ -2,8 +2,8 @@
 
 @section('content')
     <table class="table">
-        <caption style="caption-side:top; text-align:center">Список заметок</caption>
-        <thead>
+        <caption style="caption-side:top; text-align:center;  font-size: large; font-weight: bold">Список заметок</caption>
+        <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
             <th scope="col">Title</th>

@@ -26,6 +26,7 @@
                     Menu
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('welcome') }}">Welcome Page</a>
                     <a class="dropdown-item" href="{{ route('notes_index') }}">Notes</a>
                 </div>
 
@@ -76,5 +77,17 @@
             @yield('content')
         </main>
     </div>
+
+    <footer class="page-footer bg-white fixed-bottom justify-content-center">
+
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a href="http://127.0.0.1:8000/">127.0.0.1</a>
+
+        </div>
+    </footer>
+
+
+
 </body>
+
 </html>
