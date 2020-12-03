@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">{{ __('Note') }}</div>
+                    <div class="card-header text-light bg-dark">{{ __('Note') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('notes_update',['note' => $note]) }}">
@@ -14,7 +14,7 @@
 
                             <div class="form-group row">
                                 <label for="title"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
+                                       class="col-md-4  text-md-right">{{ __('Title') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="title" type="text" value="{{ $note->title}}"
@@ -30,7 +30,7 @@
 
                             <div class="form-group row">
                                 <label for="body"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Body') }}</label>
+                                       class="col-md-4  text-md-right">{{ __('Body') }}</label>
 
                                 <div class="col-md-6">
                                     <textarea id="body" class="form-control @error('body') is-invalid @enderror"
@@ -46,11 +46,12 @@
 
                             <div class="form-group row">
                                 <label for="important"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Important') }}</label>
+                                       class="col-md-4 text-md-right">{{ __('Important') }}</label>
 
                                 <div class="form-check">
-                                    <input class="form-check-input  @error('important') is-invalid @enderror" {{ ($note->is_important == 1 ? ' checked' : '') }}
-                                    name="important" type="checkbox" value="" id="important">
+                                    <input class="@error('important') is-invalid @enderror"
+                                           {{ ($note->is_important == 1 ? ' checked' : '') }}
+                                           name="important" type="radio" id="important">
                                     @error('important')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
+    <a href="{{ Request::fullUrlWithQuery(['sort' => 'is_important']) }}"> <button type="button" class="btn btn-warning"> Important</button></a>
+
     <table class="table">
         <caption style="caption-side:top; text-align:center;  font-size: large; font-weight: bold">List of notes</caption>
         <thead class="thead-dark">
@@ -33,7 +36,7 @@
     </table>
 
     <div class="d-flex justify-content-center">
-        {{ $notes->links('vendor.pagination.bootstrap-4') }}
+        {{ $notes->appends(request()->query())->links('vendor.pagination.bootstrap-4') }}
     </div>
 
 @endsection
