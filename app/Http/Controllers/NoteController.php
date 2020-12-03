@@ -49,7 +49,8 @@ class NoteController extends Controller
     public function update(Note $note, NoteUpdateRequest $request)
     {
         $this->noteService->update($request->validated(), $note);
-        return view('notes.edit', ['note' => $note]);
+        
+        return view('notes.show', ['note' => $note]);
     }
     public function delete(Note $note)
     {
