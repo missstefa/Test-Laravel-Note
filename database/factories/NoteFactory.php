@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Note;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class NoteFactory extends Factory
@@ -24,7 +25,8 @@ class NoteFactory extends Factory
         return [
             'title' => $this->faker->title,
             'body' => $this->faker->text,
-            'is_important' => $this->faker->boolean
+            'is_important' => $this->faker->boolean,
+            'user_id' => User::inRandomOrder()->get()->first()->id
         ];
     }
 }
