@@ -2,7 +2,16 @@
 
 @section('content')
 
-    <a href="{{ Request::fullUrlWithQuery(['sort' => 'is_important']) }}"> <button type="button" class="btn btn-warning"> Important</button></a>
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sort
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="{{ Request::fullUrlWithQuery(['sort' => 'id']) }}">ID</a>
+            <a class="dropdown-item" href="{{ Request::fullUrlWithQuery(['sort' => '-is_important']) }}">Important</a>
+            <a class="dropdown-item" href="{{ Request::fullUrlWithQuery(['sort' => 'is_important']) }}">Unimportant</a>
+        </div>
+    </div>
 
     <table class="table">
         <caption style="caption-side:top; text-align:center;  font-size: large; font-weight: bold">List of notes</caption>

@@ -8,6 +8,7 @@ use App\Models\Note;
 use App\Services\NoteService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class NoteController extends Controller
 {
@@ -32,8 +33,10 @@ class NoteController extends Controller
 
     public function index(Request $request)
     {
-        $notes = Note::orderByDesc($request->input('sort', 'id'))->paginate(10);
-
+        $notes = QueryBuilder::for(Note::class)
+            ->defaultSort('id')
+            ->allowedSorts('id', 'is_important')
+            ->paginate(5);
 
         return view('notes.index', ['notes' => $notes]);
     }
