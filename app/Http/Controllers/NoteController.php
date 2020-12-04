@@ -6,6 +6,9 @@ use App\Http\Requests\NoteStoreRequest;
 use App\Http\Requests\NoteUpdateRequest;
 use App\Models\Note;
 use App\Services\NoteService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class NoteController extends Controller
 {
@@ -28,9 +31,13 @@ class NoteController extends Controller
         return redirect('notes');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $notes = Note::all();
+        $notes = QueryBuilder::for(Note::class)
+            ->defaultSort('id')
+            ->allowedSorts('id', 'is_important')
+            ->paginate(5);
+
         return view('notes.index', ['notes' => $notes]);
     }
 
@@ -47,7 +54,8 @@ class NoteController extends Controller
     public function update(Note $note, NoteUpdateRequest $request)
     {
         $this->noteService->update($request->validated(), $note);
-        return view('notes.edit', ['note' => $note]);
+
+        return view('notes.show', ['note' => $note]);
     }
     public function delete(Note $note)
     {

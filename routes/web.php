@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NoteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,27 +14,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Auth::routes();
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () {return view('welcome');})->name('welcome');
 
 
 
 Route::middleware('auth:web')->group(function () {
 
-Route::get('/notes', [\App\Http\Controllers\NoteController::class, 'index'])->name('notes_index');
+Route::get('/notes', [NoteController::class, 'index'])->name('notes_index');
 
-Route::post('/notes', [\App\Http\Controllers\NoteController::class, 'store'])->name('notes_store');
+Route::post('/notes', [NoteController::class, 'store'])->name('notes_store');
 
-Route::get('/notes/create', [\App\Http\Controllers\NoteController::class, 'create'])->name('notes_create');
+Route::get('/notes/create', [NoteController::class, 'create'])->name('notes_create');
 
-Route::get('/notes/{note}',[\App\Http\Controllers\NoteController::class, 'show'])->name('notes_show');
+Route::get('/notes/{note}',[NoteController::class, 'show'])->name('notes_show');
 
-Route::get('/notes/{note}/edit', [\App\Http\Controllers\NoteController::class, 'edit'])->name('notes_edit');
+Route::get('/notes/{note}/edit', [NoteController::class, 'edit'])->name('notes_edit');
 
-Route::patch('/notes/{note}',[\App\Http\Controllers\NoteController::class, 'update'])->name('notes_update');
+Route::patch('/notes/{note}',[NoteController::class, 'update'])->name('notes_update');
 
-Route::delete('/notes/{note}',[\App\Http\Controllers\NoteController::class, 'delete'])->name('notes_delete');
+Route::delete('/notes/{note}',[NoteController::class, 'delete'])->name('notes_delete');
 });

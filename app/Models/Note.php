@@ -14,4 +14,10 @@ class Note extends Model
         'body',
         'is_important'
     ];
+
+    public function getFormatDateForIndex()
+    {
+        return \Carbon\Carbon::parse($this->created_at)->format('d F H:i');
+    }
+
 }
