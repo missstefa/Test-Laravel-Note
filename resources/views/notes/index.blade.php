@@ -21,6 +21,7 @@
             <th scope="col">Title</th>
             <th scope="col">Important</th>
             <th scope="col">Created date</th>
+            <th scope="col">User name</th>
             <th scope="col">Actions</th>
         </tr>
         </thead>
@@ -31,6 +32,7 @@
                 <td>{{ $note->title }}</td>
                 <td>{{ $note->is_important }}</td>
                 <td>{{ $note->getFormatDateForIndex() }}</td>
+                <td>{{ $note->user->name }}</td>
                 <td>
                     <form method="GET" action="{{ route('notes_show',['note' => $note->id]) }}">
                         @csrf
