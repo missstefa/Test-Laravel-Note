@@ -60,6 +60,11 @@
                                 </div>
                             </div>
 
+                            <div class="form-group col-md-6 offset-md-4">
+                                <label for="photo">Прикрепить файлы</label>
+                                <input type="file" name="file" id="file" class="form-control-file" required>
+                            </div>
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">

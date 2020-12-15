@@ -35,11 +35,19 @@
 
                             <div class="col-md-6">
 
-                                <input type="radio" onclick="return false;"  name="is_important" id="is_important"
+                                <input type="radio" onclick="return false;" name="is_important" id="is_important"
                                         {{ ($note->is_important == 1 ? ' checked' : '') }}>
                             </div>
 
                         </div>
+
+                        <div class="form-group row">
+                            <div class="col d-flex justify-content-center">
+                                <img src="{{asset('storage/'.$note->image)}}" class="img-rounded pull-xs-left"
+                                     width="200" height="200" alt="пися">
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <a href="{{ route('notes_edit',['note' => $note]) }}">

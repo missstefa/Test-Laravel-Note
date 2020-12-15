@@ -21,6 +21,7 @@ class CreateNotesTable extends Migration
                 $table->text('body')->nullable();
                 $table->boolean('is_important')->default(false);
                 $table->timestamps();
+                $table->string('image')->nullable();
 
             }
         );

@@ -25,9 +25,9 @@ Route::middleware(['auth:web', 'can:view,note'])->group(function () {
 
 Route::get('/notes', [NoteController::class, 'index'])->name('notes_index')->withoutMiddleware('can:view,note');
 
-Route::post('/notes', [NoteController::class, 'store'])->name('notes_store');
+Route::post('/notes', [NoteController::class, 'store'])->name('notes_store')->withoutMiddleware('can:view,note');
 
-Route::get('/notes/create', [NoteController::class, 'create'])->name('notes_create');
+Route::get('/notes/create', [NoteController::class, 'create'])->name('notes_create')->withoutMiddleware('can:view,note');
 
 Route::get('/notes/{note}',[NoteController::class, 'show'])->name('notes_show');
 

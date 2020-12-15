@@ -23,9 +23,23 @@ class NoteController extends Controller
         return view('notes.create');
     }
 
+    protected function storeImage(Request $request)
+    {
+        $path = $request->file('image')->store('public/note');
+        return substr($path, strlen('public/'));
+    }
+
     public function store(NoteStoreRequest $request)
     {
-        $this->noteService->store($request->validated());
+        $imageUrl = $this->storeImage($request);
+        $data = $request->validated();
+        
+        $data['image'] = $imageUrl;
+
+        $data['user_id'] = $request->user()->id;
+
+        $this->noteService->store($data);
+
 
         return redirect('notes');
     }

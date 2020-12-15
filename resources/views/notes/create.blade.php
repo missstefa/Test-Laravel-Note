@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('New note') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('notes_store') }}">
+                        <form method="POST" action="{{ route('notes_store') }} " enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
@@ -58,6 +58,18 @@
                                 </div>
                             </div>
 
+                            <div class="form-group col-md-6 offset-md-4">
+                                <label for="image">Прикрепить файлы</label>
+                                <input type="file" name="image" id="image"
+                                       class="form-control-file  @error('image') is-invalid @enderror">
+
+                                @error('image')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
@@ -67,4 +79,6 @@
                             </div>
 
                         </form>
+
+
 @endsection
