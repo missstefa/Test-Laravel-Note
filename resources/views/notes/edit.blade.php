@@ -8,7 +8,8 @@
                     <div class="card-header text-light bg-dark">{{ __('Note') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('notes_update',['note' => $note]) }}">
+                        <form method="POST" action="{{ route('notes_update',['note' => $note]) }}"
+                              enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
 
@@ -27,6 +28,7 @@
                                     @enderror
                                 </div>
                             </div>
+
 
                             <div class="form-group row">
                                 <label for="body"
@@ -60,10 +62,19 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-6 offset-md-4">
-                                <label for="photo">Прикрепить файлы</label>
-                                <input type="file" name="file" id="file" class="form-control-file" required>
+
+                            <div class="form-group row">
+                                <div class="col-md-4"></div>
+                                <div class="form-group col-md-6">
+
+                                    <img id="image" width="100" height="100"
+                                         src="https://www.w3adda.com/wp-content/uploads/2019/09/No_Image-128.png"/>
+                                    
+                                    <input type="file" name="image" id="image" onchange="loadPreview(this);"
+                                           class="form-control">
+                                </div>
                             </div>
+
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
@@ -88,4 +99,5 @@
                                 </div>
                             </div>
                         </form>
+                    </div>
 @endsection

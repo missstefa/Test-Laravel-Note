@@ -69,7 +69,13 @@ class NoteController extends Controller
 
     public function update(Note $note, NoteUpdateRequest $request)
     {
-        $this->noteService->update($request->validated(), $note);
+        $imageUrl = $this->storeImage($request);
+        $data = $request->validated();
+
+        $data['image'] = $imageUrl;
+
+        $this->noteService->update($data, $note);
+
 
         return view('notes.show', ['note' => $note]);
     }

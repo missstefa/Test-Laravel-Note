@@ -41,12 +41,15 @@
 
                         </div>
 
-                        <div class="form-group row">
-                            <div class="col d-flex justify-content-center">
-                                <img src="{{asset('storage/'.$note->image)}}" class="img-rounded pull-xs-left"
-                                     width="200" height="200" alt="пися">
+                        @if($note->image)
+                            <div class="form-group row">
+                                <div class="col d-flex justify-content-center">
+                                    <img src="{{asset('storage/'.$note->image)}}" class="img-rounded pull-xs-left"
+                                         width="200" height="200" alt="пися">
+                                </div>
                             </div>
-                        </div>
+                        @endif
+
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
