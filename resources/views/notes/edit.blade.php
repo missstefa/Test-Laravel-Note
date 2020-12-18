@@ -66,10 +66,14 @@
                             <div class="form-group row">
                                 <div class="col-md-4"></div>
                                 <div class="form-group col-md-6">
+                                    @if(!$note->image)
+                                        <img id="image" width="100" height="100"
+                                             src="https://www.w3adda.com/wp-content/uploads/2019/09/No_Image-128.png"/>
+                                    @else
+                                        <img src="{{asset('storage/'.$note->image)}}" class="img-rounded pull-xs-left"
+                                             width="200" height="200" alt="пися">
+                                    @endif
 
-                                    <img id="image" width="100" height="100"
-                                         src="https://www.w3adda.com/wp-content/uploads/2019/09/No_Image-128.png"/>
-                                    
                                     <input type="file" name="image" id="image" onchange="loadPreview(this);"
                                            class="form-control">
                                 </div>
