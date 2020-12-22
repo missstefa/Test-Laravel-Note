@@ -25,8 +25,8 @@ class NoteController extends Controller
 
     protected function storeImage(Request $request)
     {
-
         $image =  $request->file('image');
+
         if ($image) {
             $path = $image->store('public/note');
             return substr($path, strlen('public/'));
