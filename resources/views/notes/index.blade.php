@@ -2,19 +2,31 @@
 
 @section('content')
 
-    <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Sort
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="{{ Request::fullUrlWithQuery(['sort' => 'id']) }}">ID</a>
-            <a class="dropdown-item" href="{{ Request::fullUrlWithQuery(['sort' => '-is_important']) }}">Important</a>
-            <a class="dropdown-item" href="{{ Request::fullUrlWithQuery(['sort' => 'is_important']) }}">Unimportant</a>
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+        <a href="{{ route('notes_create')}}">
+            <button type="button" class="btn btn-success">
+                {{ __('Create New') }}
+            </button>
+        </a>
+
+        <div class="btn-group" role="group">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                Sort
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="{{ Request::fullUrlWithQuery(['sort' => 'id']) }}">ID</a>
+                <a class="dropdown-item"
+                   href="{{ Request::fullUrlWithQuery(['sort' => '-is_important']) }}">Important</a>
+                <a class="dropdown-item"
+                   href="{{ Request::fullUrlWithQuery(['sort' => 'is_important']) }}">Unimportant</a>
+            </div>
         </div>
     </div>
 
     <table class="table">
-        <caption style="caption-side:top; text-align:center;  font-size: large; font-weight: bold">List of notes</caption>
+        <caption style="caption-side:top; text-align:center;  font-size: large; font-weight: bold">List of notes
+        </caption>
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
@@ -25,8 +37,8 @@
             <th scope="col">Actions</th>
         </tr>
         </thead>
-            <tbody>
-            @foreach ($notes as $note)
+        <tbody>
+        @foreach ($notes as $note)
             <tr>
                 <td>{{ $note->id }}</td>
                 <td>{{ $note->title }}</td>
@@ -42,8 +54,8 @@
                     </form>
                 </td>
             </tr>
-            @endforeach
-            </tbody>
+        @endforeach
+        </tbody>
     </table>
 
     <div class="d-flex justify-content-center">

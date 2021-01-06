@@ -6,16 +6,19 @@ use App\Http\Requests\NoteStoreRequest;
 use App\Http\Requests\NoteUpdateRequest;
 use App\Models\Note;
 use App\Services\NoteService;
+use App\Services\ImageService;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class NoteController extends Controller
 {
-    protected NoteService $noteService;
+    private NoteService $noteService;
+    private ImageService $imageService;
 
-    public function __construct(NoteService $noteService)
+    public function __construct(NoteService $noteService, ImageService $imageService)
     {
         $this->noteService = $noteService;
+        $this->imageService = $imageService;
     }
 
     public function create()
@@ -23,9 +26,18 @@ class NoteController extends Controller
         return view('notes.create');
     }
 
+
     public function store(NoteStoreRequest $request)
     {
-        $this->noteService->store($request->validated());
+        $imageUrl = $this->imageService->storeImage($request);
+        $data = $request->validated();
+
+        $data['image'] = $imageUrl;
+
+        $data['user_id'] = $request->user()->id;
+
+        $this->noteService->store($data);
+
 
         return redirect('notes');
     }
@@ -55,7 +67,12 @@ class NoteController extends Controller
 
     public function update(Note $note, NoteUpdateRequest $request)
     {
-        $this->noteService->update($request->validated(), $note);
+        $imageUrl = $this->imageService->storeImage($request);
+        $data = $request->validated();
+
+        $data['image'] = $imageUrl;
+
+        $this->noteService->update($data, $note);
 
         return view('notes.show', ['note' => $note]);
     }

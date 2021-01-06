@@ -17,23 +17,34 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/', function () {return view('welcome');})->name('welcome');
+Route::get(
+    '/',
+    function () {
+        return view('welcome');
+    }
+)->name('welcome');
 
 
+Route::prefix('notes')->middleware(['auth:web'])->name('notes_')->group(
+    function () {
 
-Route::middleware(['auth:web', 'can:view,note'])->group(function () {
+        Route::get('/', [NoteController::class, 'index'])->name('index');
 
-Route::get('/notes', [NoteController::class, 'index'])->name('notes_index')->withoutMiddleware('can:view,note');
+        Route::post('/', [NoteController::class, 'store'])->name('store');
 
-Route::post('/notes', [NoteController::class, 'store'])->name('notes_store');
+        Route::get('/create', [NoteController::class, 'create'])->name('create');
 
-Route::get('/notes/create', [NoteController::class, 'create'])->name('notes_create');
 
-Route::get('/notes/{note}',[NoteController::class, 'show'])->name('notes_show');
+        Route::middleware('can:view,note')->group(
+            function () {
+                Route::get('/{note}', [NoteController::class, 'show'])->name('show');
 
-Route::get('/notes/{note}/edit', [NoteController::class, 'edit'])->name('notes_edit');
+                Route::get('/{note}/edit', [NoteController::class, 'edit'])->name('edit');
 
-Route::patch('/notes/{note}',[NoteController::class, 'update'])->name('notes_update');
+                Route::patch('/{note}', [NoteController::class, 'update'])->name('update');
 
-Route::delete('/notes/{note}',[NoteController::class, 'delete'])->name('notes_delete');
-});
+                Route::delete('/{note}', [NoteController::class, 'delete'])->name('delete');
+            }
+        );
+    }
+);

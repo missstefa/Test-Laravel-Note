@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('New note') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('notes_store') }}">
+                        <form method="POST" action="{{ route('notes_store') }} " enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
@@ -42,20 +42,36 @@
                                 </div>
                             </div>
 
-
                             <div class="form-group row">
-                                <label for="important"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Important') }}</label>
+                                <label for="important" class="col-md-4 text-md-right">{{ __('Important') }}</label>
 
                                 <div class="form-check">
-                                    <input class="form-check-input  @error('important') is-invalid @enderror"
-                                           name="important" type="checkbox" value="" id="important">
+                                    <input class="@error('important') is-invalid @enderror"
+                                           name="important" type="radio" value="" id="important">
                                     @error('important')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
+                            </div>
+
+                            <div class="form-group col-md-6 offset-md-4">
+                                <img id="image" width="200" height="200"
+                                     src="https://www.w3adda.com/wp-content/uploads/2019/09/No_Image-128.png"/>
+                            </div>
+
+                            <div class="form-group col-md-6 offset-md-4">
+                                <label class="custom-file-label" for="image">Choose file</label>
+                                <input type="file" name="image" id="image"
+                                       class="custom-file-input @error('image') is-invalid @enderror"
+                                       onchange="loadPreview(this);">
+
+                                @error('image')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="form-group row mb-0">
@@ -67,4 +83,6 @@
                             </div>
 
                         </form>
+
+
 @endsection

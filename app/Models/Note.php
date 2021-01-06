@@ -14,7 +14,8 @@ class Note extends Model
         'title',
         'body',
         'is_important',
-        'user_id'
+        'user_id',
+        'image'
     ];
 
     public function getFormatDateForIndex()

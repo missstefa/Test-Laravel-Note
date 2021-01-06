@@ -27,6 +27,7 @@ class NoteUpdateRequest extends FormRequest
             'title' => ['required', 'string', 'max:50'],
             'body' => ['string'],
             'is_important' => ['bool'],
+            'image' => ['image'],
         ];
     }
 }
