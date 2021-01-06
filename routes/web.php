@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,3 +49,6 @@ Route::prefix('notes')->middleware(['auth:web'])->name('notes_')->group(
         );
     }
 );
+
+Route::get('/profile',[ProfileController::class, 'edit'])->name('profile.edit');
+Route::post('/profile',[ProfileController::class, 'update'])->name('profile.update');

@@ -10,9 +10,8 @@ class ImageService
     public function storeImage(Request $request)
     {
         $image =  $request->file('image');
-
         if ($image) {
-            $path = $image->store('public/note');
+            $path = $image->store('public/');
             return substr($path, strlen('public/'));
         }
         return null;
