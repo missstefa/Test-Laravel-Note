@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+    {{ Breadcrumbs::render() }}
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -53,7 +55,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <a href="{{ route('notes_edit',['note' => $note]) }}">
+                                <a href="{{ route('notes.edit',['note' => $note]) }}">
                                     <button type="button" class="btn btn-primary">
                                         {{ __('Edit') }}
                                     </button>

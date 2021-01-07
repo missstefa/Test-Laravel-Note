@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -16,39 +17,38 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('welcome');
 
-Route::get(
-    '/',
+Route::middleware(['auth:web'])->group(
     function () {
-        return view('welcome');
-    }
-)->name('welcome');
-
-
-Route::prefix('notes')->middleware(['auth:web'])->name('notes_')->group(
-    function () {
-
-        Route::get('/', [NoteController::class, 'index'])->name('index');
-
-        Route::post('/', [NoteController::class, 'store'])->name('store');
-
-        Route::get('/create', [NoteController::class, 'create'])->name('create');
-
-
-        Route::middleware('can:view,note')->group(
+        Route::prefix('notes')->name('notes.')->group(
             function () {
-                Route::get('/{note}', [NoteController::class, 'show'])->name('show');
+                Route::get('/', [NoteController::class, 'index'])->name('index');
 
-                Route::get('/{note}/edit', [NoteController::class, 'edit'])->name('edit');
+                Route::post('/', [NoteController::class, 'store'])->name('store');
 
-                Route::patch('/{note}', [NoteController::class, 'update'])->name('update');
+                Route::get('/create', [NoteController::class, 'create'])->name('create');
 
-                Route::delete('/{note}', [NoteController::class, 'delete'])->name('delete');
+
+                Route::middleware('can:view,note')->group(
+                    function () {
+                        Route::get('/{note}', [NoteController::class, 'show'])->name('show');
+
+                        Route::get('/{note}/edit', [NoteController::class, 'edit'])->name('edit');
+
+                        Route::patch('/{note}', [NoteController::class, 'update'])->name('update');
+
+                        Route::delete('/{note}', [NoteController::class, 'delete'])->name('delete');
+                    }
+                );
+            }
+        );
+
+        Route::prefix('profile')->name('profile.')->group(
+            function () {
+                Route::get('/', [ProfileController::class, 'edit'])->name('edit');
+                Route::post('/', [ProfileController::class, 'update'])->name('update');
             }
         );
     }
 );
-
-Route::get('/profile',[ProfileController::class, 'edit'])->name('profile.edit');
-Route::post('/profile',[ProfileController::class, 'update'])->name('profile.update');

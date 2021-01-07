@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    {{ Breadcrumbs::render() }}
     <div class="container">
         <div class="row my-2">
             <div class="col-lg-8 order-lg-2">
