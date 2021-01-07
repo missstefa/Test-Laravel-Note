@@ -24,9 +24,9 @@ class NoteControllerTest extends TestCase
     {
         $note = Note::factory()->create();
 
-        $this->actingAs($this->user)->deleteJson(route('notes_delete', ['note' => $note]))->assertStatus(
+        $this->actingAs($this->user)->deleteJson(route('notes.delete', ['note' => $note]))->assertStatus(
             Response::HTTP_FOUND
-        )->assertRedirect(route('notes_index'));
+        )->assertRedirect(route('notes.index'));
 
         $this->assertDeleted($note);
     }
@@ -39,7 +39,7 @@ class NoteControllerTest extends TestCase
             'is_important' => $this->faker->boolean,
         ];
 
-        $this->actingAs($this->user)->postJson(route('notes_store'), $fields)->assertRedirect(route('notes_index'));
+        $this->actingAs($this->user)->postJson(route('notes.store'), $fields)->assertRedirect(route('notes.index'));
 
 
         $this->assertDatabaseHas(with(new Note())->getTable(), $fields);
@@ -61,7 +61,7 @@ class NoteControllerTest extends TestCase
             'is_important' => $note->is_important
         ];
 
-        $this->actingAs($this->user)->patchJson(route('notes_update', ['note' => $note]), $fields);
+        $this->actingAs($this->user)->patchJson(route('notes.update', ['note' => $note]), $fields);
 
         $this->assertDatabaseMissing(with(new Note())->getTable(), $oldFields);
 
@@ -72,7 +72,7 @@ class NoteControllerTest extends TestCase
     {
         $note = Note::factory()->create();
 
-        $response = $this->actingAs($this->user)->getJson(route('notes_show', ['note' => $note]));
+        $response = $this->actingAs($this->user)->getJson(route('notes.show', ['note' => $note]));
 
         $response->assertViewIs('notes.show');
 

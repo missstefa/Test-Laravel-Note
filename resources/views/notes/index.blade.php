@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+    {{ Breadcrumbs::render() }}
 
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-        <a href="{{ route('notes_create')}}">
+        <a href="{{ route('notes.create')}}">
             <button type="button" class="btn btn-success">
                 {{ __('Create New') }}
             </button>
@@ -46,7 +47,7 @@
                 <td>{{ $note->getFormatDateForIndex() }}</td>
                 <td>{{ $note->user->name }}</td>
                 <td>
-                    <form method="GET" action="{{ route('notes_show',['note' => $note->id]) }}">
+                    <form method="GET" action="{{ route('notes.show',['note' => $note->id]) }}">
                         @csrf
                         <button type="submit" class="btn btn-primary">
                             {{ __('Show') }}

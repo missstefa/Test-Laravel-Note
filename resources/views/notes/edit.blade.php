@@ -1,12 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+    {{ Breadcrumbs::render() }}
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header text-light bg-dark">
-                        <form method="POST" action="{{ route('notes_delete',['note' => $note]) }}">
+                        <form method="POST" action="{{ route('notes.delete',['note' => $note]) }}">
                             @csrf
                             @method('DELETE')
                             <div class="container">
@@ -23,7 +25,7 @@
                     </div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('notes_update',['note' => $note]) }}"
+                        <form method="POST" action="{{ route('notes.update',['note' => $note]) }}"
                               enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')

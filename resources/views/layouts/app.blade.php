@@ -29,7 +29,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ route('welcome') }}">Welcome Page</a>
-            <a class="dropdown-item" href="{{ route('notes_index') }}">Notes</a>
+            <a class="dropdown-item" href="{{ route('notes.index') }}">Notes</a>
         </div>
 
 
@@ -52,8 +52,13 @@
                         </li>
                     @endif
                 @else
-                    <img src="{{asset('storage/'. Auth::user()->image)}}" class="rounded-circle" width="35"
-                         height="35">
+                    @if(!Auth::user()->image)
+                        <img id="image" width="35" height="35" class="rounded-circle"
+                             src="https://cdn.icon-icons.com/icons2/1812/PNG/512/4213460-account-avatar-head-person-profile-user_115386.png"/>
+                    @else
+                        <img src="{{asset('storage/'. Auth::user()->image)}}" class="rounded-circle"
+                             id="image" width="35" height="35" alt="image">
+                    @endif
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
