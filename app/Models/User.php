@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -21,7 +22,8 @@ class User extends Authenticatable
         'email',
         'password',
         'birth',
-        'full_name'
+        'full_name',
+        'image'
     ];
 
     /**
@@ -47,5 +49,13 @@ class User extends Authenticatable
     public function notes()
     {
         return $this->hasMany(Note::class);
+    }
+
+    public function getAgeAttribute()
+    {
+        $birthDay = $this->birth;
+        $today = new Datetime(date('m.d.y'));
+        $diff = $today->diff($birthDay);
+        return $diff->y;
     }
 }
