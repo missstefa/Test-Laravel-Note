@@ -54,21 +54,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Address</label>
-                                <div class="col-lg-9">
-                                    <input class="form-control" type="text" value="" placeholder="Street">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label"></label>
-                                <div class="col-lg-6">
-                                    <input class="form-control" type="text" value="" placeholder="City">
-                                </div>
-                                <div class="col-lg-3">
-                                    <input class="form-control" type="text" value="" placeholder="State">
-                                </div>
-                            </div>
+
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Username</label>
                                 <div class="col-lg-9">
@@ -84,7 +70,7 @@
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Age</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" type="text" value="{{ $user->age }}">
+                                    <input readonly class="form-control" type="text" value="{{ $user->age }}">
                                 </div>
                             </div>
                             <div class="form-group row">
