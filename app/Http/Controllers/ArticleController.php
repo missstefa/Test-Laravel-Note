@@ -29,4 +29,9 @@ class ArticleController extends Controller
 
         return redirect('/');
     }
+
+    public function show(Article $article)
+    {
+        return view('articles.show', ['article' => $article]);
+    }
 }

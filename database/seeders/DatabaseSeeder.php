@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Article;
 use App\Models\Note;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -25,6 +26,7 @@ class DatabaseSeeder extends Seeder
         );
         User::factory(3)->create();
         Note::factory(15)->create();
+        Article::factory(10)->create();
     }
 }
 

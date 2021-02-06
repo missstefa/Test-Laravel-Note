@@ -56,3 +56,4 @@ Route::middleware(['auth:web'])->group(
 
 Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
 Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
+Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('article.show');

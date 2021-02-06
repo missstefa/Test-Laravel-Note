@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Article extends Model
 {
     use HasFactory;
+
+    const LIMITSHORTBODY = 150;
 
     protected $fillable = [
         'title',
@@ -15,4 +18,9 @@ class Article extends Model
         'url',
         'meta',
     ];
+
+    public function getShortBodyAttribute()
+    {
+        return Str::limit($this->body, Article::LIMITSHORTBODY );
+    }
 }
