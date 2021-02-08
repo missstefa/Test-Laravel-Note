@@ -49,7 +49,6 @@
                                 <div class="col-md-6">
                                     <input id="url" type="url"
                                            class="form-control  @error('url') is-invalid @enderror" name="url">
-
                                     @error('url')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

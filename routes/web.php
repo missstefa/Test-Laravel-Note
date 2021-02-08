@@ -54,6 +54,13 @@ Route::middleware(['auth:web'])->group(
     }
 );
 
-Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
-Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
-Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('article.show');
+Route::prefix('articles')->name('articles.')->group(
+    function () {
+        Route::get('/create', [ArticleController::class, 'create'])->name('create');
+        Route::post('/', [ArticleController::class, 'store'])->name('store');
+        Route::get('/{article}', [ArticleController::class, 'show'])->name('show');
+        Route::get('/{article}/edit', [ArticleController::class, 'edit'])->name('edit');
+        Route::patch('/{article}', [ArticleController::class, 'update'])->name('update');
+        Route::delete('/{article}', [ArticleController::class, 'delete'])->name('delete');
+    }
+);

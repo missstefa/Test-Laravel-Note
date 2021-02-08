@@ -13,4 +13,10 @@ class ArticleService
     {
         Article::create($data);
     }
+
+    public function update(array $data, Article $article): void
+    {
+        $article->fill($data);
+        $article->save();
+    }
 }

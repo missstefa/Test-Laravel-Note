@@ -39,7 +39,7 @@
                                 </h3>
                                 <div class="mb-1 text-muted">{{ $article->created_at }}</div>
                                 <p class="card-text mb-auto">{{ $article->short_body }}</p>
-                                <a href="{{ route('article.show',['article' => $article->id]) }}">Continue reading</a>
+                                <a href="{{ route('articles.show',['article' => $article->id]) }}">Continue reading</a>
                             </div>
                             <img class="card-img-right flex-auto d-none d-md-block"
                                  data-src="holder.js/200x250?theme=thumb"

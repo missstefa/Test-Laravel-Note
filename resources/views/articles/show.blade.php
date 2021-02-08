@@ -36,20 +36,20 @@
 
                             <div class="col-md-6">
                                 <input id="url" type="url" class="form-control" readonly
-                                              name="url" rows="5"value="{{ $article->url }}">
+                                              name="url" value="{{ $article->url }}">
                             </div>
                         </div>
                         
 
-{{--                        <div class="form-group row mb-0">--}}
-{{--                            <div class="col-md-6 offset-md-4">--}}
-{{--                                <a href="{{ route('notes.edit',['note' => $note]) }}">--}}
-{{--                                    <button type="button" class="btn btn-primary">--}}
-{{--                                        {{ __('Edit') }}--}}
-{{--                                    </button>--}}
-{{--                                </a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <a href="{{ route('articles.edit',['article' => $article]) }}">
+                                    <button type="button" class="btn btn-primary">
+                                        {{ __('Edit') }}
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
 
 
 
