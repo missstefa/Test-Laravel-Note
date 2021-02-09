@@ -46,16 +46,21 @@ class User extends Authenticatable
         'birth' => 'datetime'
     ];
 
-    public function notes()
-    {
-        return $this->hasMany(Note::class);
-    }
-
     public function getAgeAttribute()
     {
         $birthDay = $this->birth;
         $today = new Datetime(date('m.d.y'));
         $diff = $today->diff($birthDay);
         return $diff->y;
+    }
+
+    public function articles()
+    {
+        return $this->morphedByMany(Article::class, 'userable');
+    }
+
+    public function notes()
+    {
+        return $this->morphedByMany(Note::class, 'userable');
     }
 }

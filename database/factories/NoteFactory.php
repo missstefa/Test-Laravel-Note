@@ -26,7 +26,6 @@ class NoteFactory extends Factory
             'title' => $this->faker->title,
             'body' => $this->faker->text,
             'is_important' => $this->faker->boolean,
-            'user_id' => User::inRandomOrder()->get()->first()->id
         ];
     }
 }

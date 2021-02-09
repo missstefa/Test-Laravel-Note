@@ -8,6 +8,8 @@ use App\Models\Note;
 use App\Services\NoteService;
 use App\Services\ImageService;
 use Illuminate\Contracts\View\View;
+
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -48,10 +50,13 @@ class NoteController extends Controller
         $userId = $request->user()->id;
 
         $notes = QueryBuilder::for(Note::class)
-            ->where('user_id', $userId)
+            ->whereHas('users', function (Builder $query) use($userId) {
+                $query->where('id', $userId);
+            })
             ->defaultSort('id')
             ->allowedSorts('id', 'is_important')
             ->paginate(5);
+
 
         return view('notes.index', ['notes' => $notes]);
     }

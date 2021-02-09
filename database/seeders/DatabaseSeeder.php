@@ -17,16 +17,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->create(
+        $user = User::factory()->create(
             [
                 'name' => 'Stefa',
                 'email' => 'miss.stefa@yandex.ru',
-                'password' => Hash::make('s25088888')
+                'password' => Hash::make('s25088888'),
             ]
         );
-        User::factory(3)->create();
-        Note::factory(15)->create();
-        Article::factory(10)->create();
+
+        Note::factory(5)->has(User::factory())->create();
+        Article::factory(3)->has(User::factory())->create();
+
+        $notes = Note::factory(10)->create();
+        $articles =  Article::factory(5)->create();
+
+        $user->notes()->sync($notes);
+        $user->articles()->sync($articles);
     }
 }
 

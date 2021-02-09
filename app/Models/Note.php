@@ -14,7 +14,6 @@ class Note extends Model
         'title',
         'body',
         'is_important',
-        'user_id',
         'image'
     ];
 
@@ -23,8 +22,8 @@ class Note extends Model
         return Carbon::parse($this->created_at)->format('d F H:i');
     }
 
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->morphToMany(User::class, 'userable');
     }
 }
