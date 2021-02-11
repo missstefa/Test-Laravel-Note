@@ -1,17 +1,18 @@
 <?php
 
-
 namespace App\Services;
 
-
 use App\Models\Article;
+use App\Models\User;
 
 class ArticleService
 {
 
-    public function store(array $data): void
+    public function store(array $data, User $user): void
     {
-        Article::create($data);
+        $article = Article::create($data);
+
+        $user->articles()->attach($article);
     }
 
     public function update(array $data, Article $article): void

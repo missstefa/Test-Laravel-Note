@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\NoteStoreRequest;
 use App\Http\Requests\NoteUpdateRequest;
 use App\Models\Note;
+use App\Models\User;
 use App\Services\NoteService;
 use App\Services\ImageService;
 use Illuminate\Contracts\View\View;
@@ -38,20 +39,18 @@ class NoteController extends Controller
 
         $data['image'] = $imageUrl;
 
-        $data['user_id'] = $request->user()->id;
+        $user = $request->user();
 
-        $this->noteService->store($data);
+        $this->noteService->store($data, $user);
 
         return redirect('notes');
     }
 
     public function index(Request $request): view
     {
-        $userId = $request->user()->id;
-
         $notes = QueryBuilder::for(Note::class)
-            ->whereHas('users', function (Builder $query) use($userId) {
-                $query->where('id', $userId);
+            ->whereHas('users', function (Builder $query) use($request) {
+                $query->where('id', $request->user()->id);
             })
             ->defaultSort('id')
             ->allowedSorts('id', 'is_important')

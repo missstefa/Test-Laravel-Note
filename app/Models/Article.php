@@ -28,4 +28,9 @@ class Article extends Model
     {
         return $this->morphToMany(User::class, 'userable');
     }
+
+    public function user()
+    {
+        return $this->users->first();
+    }
 }
