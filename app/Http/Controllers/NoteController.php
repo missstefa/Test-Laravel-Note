@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\NoteStoreRequest;
 use App\Http\Requests\NoteUpdateRequest;
 use App\Models\Note;
+use App\Models\User;
 use App\Services\NoteService;
 use App\Services\ImageService;
+use Illuminate\Contracts\View\View;
+
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -21,7 +25,7 @@ class NoteController extends Controller
         $this->imageService = $imageService;
     }
 
-    public function create()
+    public function create(): view
     {
         return view('notes.create');
     }
@@ -29,48 +33,47 @@ class NoteController extends Controller
 
     public function store(NoteStoreRequest $request)
     {
-        $imageUrl = $this->imageService->storeImage($request);
         $data = $request->validated();
 
-        $data['image'] = $imageUrl;
+        $data['image'] = $this->imageService->storeImage($request);
 
-        $data['user_id'] = $request->user()->id;
-
-        $this->noteService->store($data);
-
+        $this->noteService->store($data, $request->user());
 
         return redirect('notes');
     }
 
-    public function index(Request $request)
+    public function index(Request $request): view
     {
-        $userId = $request->user()->id;
-
         $notes = QueryBuilder::for(Note::class)
-            ->where('user_id', $userId)
+            ->whereHas(
+                'users',
+                function (Builder $query) use ($request) {
+                    $query->where('id', $request->user()->id);
+                }
+            )
             ->defaultSort('id')
             ->allowedSorts('id', 'is_important')
             ->paginate(5);
 
+
         return view('notes.index', ['notes' => $notes]);
     }
 
-    public function show(Note $note)
+    public function show(Note $note): view
     {
         return view('notes.show', ['note' => $note]);
     }
 
-    public function edit(Note $note)
+    public function edit(Note $note): view
     {
         return view('notes.edit', ['note' => $note]);
     }
 
-    public function update(Note $note, NoteUpdateRequest $request)
+    public function update(Note $note, NoteUpdateRequest $request): view
     {
-        $imageUrl = $this->imageService->storeImage($request);
         $data = $request->validated();
 
-        $data['image'] = $imageUrl;
+        $data['image'] = $this->imageService->storeImage($request);
 
         $this->noteService->update($data, $note);
 
@@ -80,6 +83,7 @@ class NoteController extends Controller
     public function delete(Note $note)
     {
         $note->delete();
+
         return redirect('notes');
     }
 }

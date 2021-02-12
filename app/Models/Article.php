@@ -2,24 +2,26 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
-class Note extends Model
+class Article extends Model
 {
     use HasFactory;
+
+    const LIMITSHORTBODY = 150;
 
     protected $fillable = [
         'title',
         'body',
-        'is_important',
-        'image'
+        'url',
+        'meta',
     ];
 
-    public function getFormatDateForIndex()
+    public function getShortBodyAttribute()
     {
-        return Carbon::parse($this->created_at)->format('d F H:i');
+        return Str::limit($this->body, Article::LIMITSHORTBODY );
     }
 
     public function users()

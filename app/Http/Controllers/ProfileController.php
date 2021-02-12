@@ -27,9 +27,8 @@ class ProfileController
     public function update(ProfileUpdateRequest $request)
     {
         $data = $request->validated();
-        $imageUrl = $this->imageService->storeImage($request);
 
-        $data['image'] = $imageUrl;
+        $data['image'] = $this->imageService->storeImage($request);
 
         $this->profileService->update($data, $request->user());
 

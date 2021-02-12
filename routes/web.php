@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProfileController;
@@ -50,5 +51,16 @@ Route::middleware(['auth:web'])->group(
                 Route::post('/', [ProfileController::class, 'update'])->name('update');
             }
         );
+    }
+);
+
+Route::prefix('articles')->name('articles.')->group(
+    function () {
+        Route::get('/create', [ArticleController::class, 'create'])->name('create');
+        Route::post('/', [ArticleController::class, 'store'])->name('store');
+        Route::get('/{article}', [ArticleController::class, 'show'])->name('show');
+        Route::get('/{article}/edit', [ArticleController::class, 'edit'])->name('edit');
+        Route::patch('/{article}', [ArticleController::class, 'update'])->name('update');
+        Route::delete('/{article}', [ArticleController::class, 'delete'])->name('delete');
     }
 );

@@ -2,18 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Note;
-use App\Models\User;
+use App\Models\Article;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class NoteFactory extends Factory
+class ArticleFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Note::class;
+    protected $model = Article::class;
 
     /**
      * Define the model's default state.
@@ -24,8 +23,8 @@ class NoteFactory extends Factory
     {
         return [
             'title' => $this->faker->title,
-            'body' => $this->faker->text,
-            'is_important' => $this->faker->boolean,
+            'body' => $this->faker->text(300),
+            'url' => $this->faker->url
         ];
     }
 }
