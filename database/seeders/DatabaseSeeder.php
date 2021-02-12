@@ -26,13 +26,11 @@ class DatabaseSeeder extends Seeder
         );
 
         Note::factory(5)->has(User::factory())->create();
-        Article::factory(3)->has(User::factory())->create();
 
-        $notes = Note::factory(10)->create();
-        $articles =  Article::factory(5)->create();
-
+        $article =  Article::factory()->create();
+        $user->articles()->sync($article);
+        $notes = Note::factory(5)->create(['article_id' => $article->id]);
         $user->notes()->sync($notes);
-        $user->articles()->sync($articles);
     }
 }
 

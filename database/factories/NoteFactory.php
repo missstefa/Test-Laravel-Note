@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Article;
 use App\Models\Note;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -26,6 +27,7 @@ class NoteFactory extends Factory
             'title' => $this->faker->title,
             'body' => $this->faker->text,
             'is_important' => $this->faker->boolean,
+            'article_id' => Article::factory()->has(User::factory())
         ];
     }
 }

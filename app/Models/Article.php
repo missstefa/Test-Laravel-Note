@@ -33,4 +33,9 @@ class Article extends Model
     {
         return $this->users->first();
     }
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
 }

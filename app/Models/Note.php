@@ -31,4 +31,9 @@ class Note extends Model
     {
         return $this->users->first();
     }
+
+    public function articles()
+    {
+        return $this->belongsTo(Article::class);
+    }
 }
