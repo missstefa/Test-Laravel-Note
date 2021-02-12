@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -25,9 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
-
-        $articles->loadMissing('users');
+        $articles = Article::all()->loadMissing('users');
 
         return view('welcome', ['articles' => $articles]);
     }

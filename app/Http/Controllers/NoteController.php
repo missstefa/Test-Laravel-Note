@@ -33,15 +33,11 @@ class NoteController extends Controller
 
     public function store(NoteStoreRequest $request)
     {
-        $imageUrl = $this->imageService->storeImage($request);
-
         $data = $request->validated();
 
-        $data['image'] = $imageUrl;
+        $data['image'] = $this->imageService->storeImage($request);
 
-        $user = $request->user();
-
-        $this->noteService->store($data, $user);
+        $this->noteService->store($data, $request->user());
 
         return redirect('notes');
     }
@@ -49,9 +45,12 @@ class NoteController extends Controller
     public function index(Request $request): view
     {
         $notes = QueryBuilder::for(Note::class)
-            ->whereHas('users', function (Builder $query) use($request) {
-                $query->where('id', $request->user()->id);
-            })
+            ->whereHas(
+                'users',
+                function (Builder $query) use ($request) {
+                    $query->where('id', $request->user()->id);
+                }
+            )
             ->defaultSort('id')
             ->allowedSorts('id', 'is_important')
             ->paginate(5);
@@ -72,11 +71,9 @@ class NoteController extends Controller
 
     public function update(Note $note, NoteUpdateRequest $request): view
     {
-        $imageUrl = $this->imageService->storeImage($request);
-
         $data = $request->validated();
 
-        $data['image'] = $imageUrl;
+        $data['image'] = $this->imageService->storeImage($request);
 
         $this->noteService->update($data, $note);
 

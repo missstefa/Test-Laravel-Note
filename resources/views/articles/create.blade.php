@@ -43,7 +43,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="title"
+                                <label for="url"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Origin') }}</label>
 
                                 <div class="col-md-6">

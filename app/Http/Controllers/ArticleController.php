@@ -24,9 +24,7 @@ class ArticleController extends Controller
 
     public function store(ArticleStoreRequest $request)
     {
-        $user = $request->user();
-
-        $this->articleService->store($request->validated(), $user);
+        $this->articleService->store($request->validated(), $request->user());
 
         return redirect('/');
     }
