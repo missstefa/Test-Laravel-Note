@@ -43,6 +43,17 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="article_id"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Article ID') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="article_id" type="text" readonly value="{{ $article->id}}"
+                                           class="form-control" name="article_id">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="important" class="col-md-4 text-md-right">{{ __('Important') }}</label>
 
                                 <div class="form-check">
@@ -73,6 +84,7 @@
                                     </span>
                                 @enderror
                             </div>
+
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">

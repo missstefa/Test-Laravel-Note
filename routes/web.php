@@ -28,8 +28,6 @@ Route::middleware(['auth:web'])->group(
 
                 Route::post('/', [NoteController::class, 'store'])->name('store');
 
-                Route::get('/create', [NoteController::class, 'create'])->name('create');
-
 
                 Route::middleware('can:view,note')->group(
                     function () {
@@ -64,3 +62,5 @@ Route::prefix('articles')->name('articles.')->group(
         Route::delete('/{article}', [ArticleController::class, 'delete'])->name('delete');
     }
 );
+
+Route::get('articles/{article}/notes/create', [NoteController::class, 'create'])->name('notes.create');

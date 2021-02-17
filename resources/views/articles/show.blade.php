@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-{{--    {{ Breadcrumbs::render() }}--}}
+    {{--    {{ Breadcrumbs::render() }}--}}
 
     <div class="container">
         <div class="row justify-content-center">
@@ -35,17 +35,27 @@
                                    class="col-md-4 col-form-label text-md-right">{{ __('Origin') }}</label>
 
                             <div class="col-md-6">
-                                <input id="url" type="url" class="form-control" readonly
-                                              name="url" value="{{ $article->url }}">
+
+                                <a href="{{$article->url}}"><input id="url" type="url" class="form-control" readonly
+                                                                   name="url" value="{{$article->url}}"></a>
                             </div>
                         </div>
-                        
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <a href="{{ route('articles.edit',['article' => $article]) }}">
                                     <button type="button" class="btn btn-primary">
                                         {{ __('Edit') }}
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <a href="{{ route('notes.create',['article' => $article])}}">
+                                    <button type="button" class="btn btn-success">
+                                        {{ __('Create Note') }}
                                     </button>
                                 </a>
                             </div>

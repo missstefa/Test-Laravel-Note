@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\NoteStoreRequest;
 use App\Http\Requests\NoteUpdateRequest;
+use App\Models\Article;
 use App\Models\Note;
 use App\Models\User;
 use App\Services\NoteService;
@@ -25,9 +26,9 @@ class NoteController extends Controller
         $this->imageService = $imageService;
     }
 
-    public function create(): view
+    public function create(Article $article): view
     {
-        return view('notes.create');
+        return view('notes.create',['article' => $article]);
     }
 
 
@@ -38,6 +39,8 @@ class NoteController extends Controller
         $data['image'] = $this->imageService->storeImage($request);
 
         $this->noteService->store($data, $request->user());
+
+
 
         return redirect('notes');
     }

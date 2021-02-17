@@ -4,12 +4,6 @@
     {{ Breadcrumbs::render() }}
 
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-        <a href="{{ route('notes.create')}}">
-            <button type="button" class="btn btn-success">
-                {{ __('Create New') }}
-            </button>
-        </a>
-
         <div class="btn-group" role="group">
             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
