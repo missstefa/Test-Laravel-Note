@@ -57,15 +57,16 @@
                                 <label for="important" class="col-md-4 text-md-right">{{ __('Important') }}</label>
 
                                 <div class="form-check">
-                                    <input class="@error('important') is-invalid @enderror"
-                                           name="important" type="radio" value="" id="important">
-                                    @error('important')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                    <input class="form-check-input"
+                                           name="is_important" type="radio" id="important" >
+
                                 </div>
                             </div>
+
+{{--                            <div class="form-check form-switch">--}}
+{{--                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">--}}
+{{--                                <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>--}}
+{{--                            </div>--}}
 
                             <div class="form-group col-md-6 offset-md-4">
                                 <img id="image" width="200" height="200"

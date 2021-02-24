@@ -6,10 +6,10 @@ use App\Http\Requests\NoteStoreRequest;
 use App\Http\Requests\NoteUpdateRequest;
 use App\Models\Article;
 use App\Models\Note;
-use App\Models\User;
 use App\Services\NoteService;
 use App\Services\ImageService;
 use Illuminate\Contracts\View\View;
+
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -28,7 +28,7 @@ class NoteController extends Controller
 
     public function create(Article $article): view
     {
-        return view('notes.create',['article' => $article]);
+        return view('notes.create', ['article' => $article]);
     }
 
 
@@ -36,11 +36,10 @@ class NoteController extends Controller
     {
         $data = $request->validated();
 
+
         $data['image'] = $this->imageService->storeImage($request);
 
         $this->noteService->store($data, $request->user());
-
-
 
         return redirect('notes');
     }

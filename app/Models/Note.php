@@ -13,6 +13,7 @@ class Note extends Model
     protected $fillable = [
         'title',
         'body',
+        'article_id',
         'is_important',
         'image'
     ];
