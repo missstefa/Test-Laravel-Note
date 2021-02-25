@@ -58,15 +58,11 @@
 
                                 <div class="form-check">
                                     <input class="form-check-input"
-                                           name="is_important" type="radio" id="important" >
+                                           name="is_important" type="checkbox" id="important" >
 
                                 </div>
                             </div>
 
-{{--                            <div class="form-check form-switch">--}}
-{{--                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">--}}
-{{--                                <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>--}}
-{{--                            </div>--}}
 
                             <div class="form-group col-md-6 offset-md-4">
                                 <img id="image" width="200" height="200"

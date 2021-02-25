@@ -7,8 +7,23 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header text-light bg-dark">{{"Show Note {$note->id}"}}</div>
+                    <div class="card-header text-light bg-dark">
 
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-10">{{"Show Note {$note->id}"}}</div>
+                                <div class="col-2">
+                                    <form method="GET" action="{{ route('articles.show',['article' => $note->article_id]) }}">
+                                        @csrf
+                                    <button type="submit"
+                                            class="btn btn-info float-right">{{"Article {$note->article_id}"}}</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+
+                </div>
                     <div class="card-body">
                         <div class="form-group row">
                             <label for="title"

@@ -67,12 +67,7 @@
                                 <div class="form-check">
                                     <input class="@error('important') is-invalid @enderror"
                                            {{ ($note->is_important == 1 ? ' checked' : '') }}
-                                           name="important" type="radio" id="important">
-                                    @error('important')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                           name="is_important" type="checkbox" id="important">
                                 </div>
                             </div>
 
