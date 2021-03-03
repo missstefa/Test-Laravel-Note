@@ -38,4 +38,9 @@ class Article extends Model
     {
         return $this->hasMany(Note::class);
     }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 }
