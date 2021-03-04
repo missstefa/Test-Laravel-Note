@@ -63,4 +63,9 @@ class User extends Authenticatable
     {
         return $this->morphedByMany(Note::class, 'userable');
     }
+
+    public function likes()
+    {
+        return  $this->hasMany(Like::class);
+    }
 }

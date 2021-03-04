@@ -45,7 +45,7 @@
                                 <a href="{{ route('articles.show',['article' => $article->id]) }}">Continue reading</a>
 
                                 <div class="flex items-center">
-                                    <form action="" method="post" class="mr-1">
+                                    <form action="{{ route('likes.store', $article->id) }}" method="post" class="mr-1">
                                         @csrf
                                         <button type="submit" class="text-blue-500">Like</button>
                                     </form>
@@ -55,7 +55,9 @@
                                         @method('DELETE')
                                         <button type="submit" class="text-blue-500">Unlike</button>
                                     </form>
-                                    <span>{{ $articles->likes->count() }} {{ Str::plural('like', $articles->likes->count()) }}</span>
+
+
+                                    <span>{{ $article->like->count() }} {{ Str::plural('like', $article->like->count()) }}</span>
                                 </div>
 
 

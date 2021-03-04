@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ArticleLikeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProfileController;
@@ -64,3 +65,5 @@ Route::prefix('articles')->name('articles.')->group(
 );
 
 Route::get('articles/{article}/notes/create', [NoteController::class, 'create'])->name('notes.create');
+
+Route::post('articles/{article}/likes', [ArticleLikeController::class, 'store'])->name('likes.store');

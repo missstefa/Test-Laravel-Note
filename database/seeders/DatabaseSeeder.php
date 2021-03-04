@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Article;
+use App\Models\Like;
 use App\Models\Note;
 use App\Models\User;
+use Database\Factories\LikeFactory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -27,7 +29,7 @@ class DatabaseSeeder extends Seeder
 
         Note::factory(5)->has(User::factory())->create();
 
-        $article =  Article::factory()->create();
+        $article =  Article::factory()->has(Like::factory(2))->create();
         $user->articles()->sync($article);
         $notes = Note::factory(5)->create(['article_id' => $article->id]);
         $user->notes()->sync($notes);
