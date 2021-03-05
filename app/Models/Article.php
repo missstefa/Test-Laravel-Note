@@ -24,6 +24,11 @@ class Article extends Model
         return Str::limit($this->body, Article::LIMITSHORTBODY );
     }
 
+    public function likedBy(User $user)
+    {
+        return $this->likes->contains('user_id', $user->id);
+    }
+
     public function users()
     {
         return $this->morphToMany(User::class, 'userable');

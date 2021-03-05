@@ -45,19 +45,20 @@
                                 <a href="{{ route('articles.show',['article' => $article->id]) }}">Continue reading</a>
 
                                 <div class="flex items-center">
+                                    @if(!$article->likedBy(auth()->user()))
                                     <form action="{{ route('likes.store', $article->id) }}" method="post" class="mr-1">
                                         @csrf
                                         <button type="submit" class="text-blue-500">Like</button>
                                     </form>
-
-                                    <form action="" method="post" class="mr-1">
+                                    @else
+                                    <form action="{{ route('likes.destroy', $article->id) }}" method="post" class="mr-1">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-blue-500">Unlike</button>
                                     </form>
+                                    @endif
 
-
-                                    <span>{{ $article->like->count() }} {{ Str::plural('like', $article->like->count()) }}</span>
+                                    <span>{{ $article->likes_count }} {{ Str::plural('like', $article->likes_count) }}</span>
                                 </div>
 
 
