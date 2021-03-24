@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\NoteStoreRequest;
 use App\Http\Requests\NoteUpdateRequest;
+use App\Models\Article;
 use App\Models\Note;
-use App\Models\User;
 use App\Services\NoteService;
 use App\Services\ImageService;
 use Illuminate\Contracts\View\View;
+
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -25,15 +26,16 @@ class NoteController extends Controller
         $this->imageService = $imageService;
     }
 
-    public function create(): view
+    public function create(Article $article): view
     {
-        return view('notes.create');
+        return view('notes.create', ['article' => $article]);
     }
 
 
     public function store(NoteStoreRequest $request)
     {
         $data = $request->validated();
+
 
         $data['image'] = $this->imageService->storeImage($request);
 

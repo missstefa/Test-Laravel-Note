@@ -23,7 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $articles = Article::all()->loadMissing('users');
+        $articles = Article::query()
+            ->withCount('likes')
+            ->with('users')
+            ->get();
 
         return view('welcome', ['articles' => $articles]);
     }

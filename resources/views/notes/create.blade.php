@@ -43,18 +43,26 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="article_id"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Article ID') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="article_id" type="text" readonly value="{{ $article->id}}"
+                                           class="form-control" name="article_id">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="important" class="col-md-4 text-md-right">{{ __('Important') }}</label>
 
                                 <div class="form-check">
-                                    <input class="@error('important') is-invalid @enderror"
-                                           name="important" type="radio" value="" id="important">
-                                    @error('important')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                    <input class="form-check-input"
+                                           name="is_important" type="checkbox" id="important" >
+
                                 </div>
                             </div>
+
 
                             <div class="form-group col-md-6 offset-md-4">
                                 <img id="image" width="200" height="200"
@@ -73,6 +81,7 @@
                                     </span>
                                 @enderror
                             </div>
+
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">

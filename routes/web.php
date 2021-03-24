@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ArticleLikeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProfileController;
@@ -27,8 +28,6 @@ Route::middleware(['auth:web'])->group(
                 Route::get('/', [NoteController::class, 'index'])->name('index');
 
                 Route::post('/', [NoteController::class, 'store'])->name('store');
-
-                Route::get('/create', [NoteController::class, 'create'])->name('create');
 
 
                 Route::middleware('can:view,note')->group(
@@ -64,3 +63,8 @@ Route::prefix('articles')->name('articles.')->group(
         Route::delete('/{article}', [ArticleController::class, 'delete'])->name('delete');
     }
 );
+
+Route::get('articles/{article}/notes/create', [NoteController::class, 'create'])->name('notes.create');
+
+Route::post('articles/{article}/likes', [ArticleLikeController::class, 'store'])->name('likes.store');
+Route::delete('articles/{article}/likes', [ArticleLikeController::class, 'destroy'])->name('likes.destroy');

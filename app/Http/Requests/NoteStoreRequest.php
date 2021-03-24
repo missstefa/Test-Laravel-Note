@@ -27,8 +27,26 @@ class NoteStoreRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:50'],
             'body' => ['string'],
+            'article_id' => ['string'],
             'is_important' => ['bool'],
             'image' => ['image'],
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge(
+            [
+                'is_important' => $this->prepareImportant(),
+            ]
+        );
+    }
+
+    public function prepareImportant()
+    {
+        if ($this->is_important == 'on') {
+            return true;
+        }
+        return false;
     }
 }

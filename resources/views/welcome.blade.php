@@ -41,10 +41,27 @@
                                 </h3>
                                 <div class="mb-1 text-muted">{{ $article->created_at }}</div>
                                 <p class="card-text mb-auto">{{ $article->short_body }}</p>
-
                                 <div class="mb-1 text-muted">{{ $article->user()->name }}</div>
-
                                 <a href="{{ route('articles.show',['article' => $article->id]) }}">Continue reading</a>
+
+                                <div class="flex items-center">
+                                    @if(!$article->likedBy(auth()->user()))
+                                    <form action="{{ route('likes.store', $article->id) }}" method="post" class="mr-1">
+                                        @csrf
+                                        <button type="submit" class="text-blue-500">Like</button>
+                                    </form>
+                                    @else
+                                    <form action="{{ route('likes.destroy', $article->id) }}" method="post" class="mr-1">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-blue-500">Unlike</button>
+                                    </form>
+                                    @endif
+
+                                    <span>{{ $article->likes_count }} {{ Str::plural('like', $article->likes_count) }}</span>
+                                </div>
+
+
                             </div>
                             <img class="card-img-right flex-auto d-none d-md-block"
                                  data-src="holder.js/200x250?theme=thumb"

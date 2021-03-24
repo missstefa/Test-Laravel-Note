@@ -13,6 +13,7 @@ class Note extends Model
     protected $fillable = [
         'title',
         'body',
+        'article_id',
         'is_important',
         'image'
     ];
@@ -30,5 +31,10 @@ class Note extends Model
     public function user()
     {
         return $this->users->first();
+    }
+
+    public function articles()
+    {
+        return $this->belongsTo(Article::class);
     }
 }
