@@ -50,21 +50,24 @@ Route::middleware(['auth:web'])->group(
                 Route::post('/', [ProfileController::class, 'update'])->name('update');
             }
         );
+        Route::prefix('articles')->name('articles.')->group(
+            function () {
+                Route::get('/create', [ArticleController::class, 'create'])->name('create');
+                Route::post('/', [ArticleController::class, 'store'])->name('store');
+                Route::get('/{article}', [ArticleController::class, 'show'])->name('show');
+                Route::get('/{article}/edit', [ArticleController::class, 'edit'])->name('edit');
+                Route::patch('/{article}', [ArticleController::class, 'update'])->name('update');
+                Route::delete('/{article}', [ArticleController::class, 'delete'])->name('delete');
+            }
+        );
+
+        Route::get('articles/{article}/notes/create', [NoteController::class, 'create'])->name('notes.create');
+
+        Route::post('articles/{article}/likes', [ArticleLikeController::class, 'store'])->name('likes.store');
+        Route::delete('articles/{article}/likes', [ArticleLikeController::class, 'destroy'])->name('likes.destroy');
     }
 );
 
-Route::prefix('articles')->name('articles.')->group(
-    function () {
-        Route::get('/create', [ArticleController::class, 'create'])->name('create');
-        Route::post('/', [ArticleController::class, 'store'])->name('store');
-        Route::get('/{article}', [ArticleController::class, 'show'])->name('show');
-        Route::get('/{article}/edit', [ArticleController::class, 'edit'])->name('edit');
-        Route::patch('/{article}', [ArticleController::class, 'update'])->name('update');
-        Route::delete('/{article}', [ArticleController::class, 'delete'])->name('delete');
-    }
-);
 
-Route::get('articles/{article}/notes/create', [NoteController::class, 'create'])->name('notes.create');
 
-Route::post('articles/{article}/likes', [ArticleLikeController::class, 'store'])->name('likes.store');
-Route::delete('articles/{article}/likes', [ArticleLikeController::class, 'destroy'])->name('likes.destroy');
+

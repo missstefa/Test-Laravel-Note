@@ -17,7 +17,7 @@
 
                                 <div class="col-md-6">
                                     <input id="title" type="text"
-                                           class="form-control @error('title') is-invalid @enderror" name="title">
+                                           class="form-control @error('title') is-invalid @enderror" name="title" value=" {{ old('title') }}">
 
                                     @error('title')
                                     <span class="invalid-feedback" role="alert">
@@ -33,7 +33,7 @@
 
                                 <div class="col-md-6">
                                     <textarea id="body" class="form-control @error('body') is-invalid @enderror"
-                                              name="body" rows="5"></textarea>
+                                              name="body" rows="5">{{old('body')}}</textarea>
                                     @error('body')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -48,7 +48,7 @@
 
                                 <div class="col-md-6">
                                     <input id="url" type="url"
-                                           class="form-control  @error('url') is-invalid @enderror" name="url">
+                                           class="form-control  @error('url') is-invalid @enderror" name="url" value=" {{ old('url') }}">
                                     @error('url')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

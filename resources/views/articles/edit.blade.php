@@ -34,8 +34,8 @@
                             <label for="title" class="col-md-4  text-md-right">{{ __('Title') }}</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" value="{{ $article->title}}"
-                                       class="form-control @error('title') is-invalid @enderror" name="title">
+                                <input id="title" type="text" value="{{ old('title') ?? $article->title}}"
+                                       class="form-control @error('title') is-invalid @enderror" name="title" >
 
                                 @error('title')
                                 <span class="invalid-feedback" role="alert">
@@ -51,7 +51,7 @@
 
                             <div class="col-md-6">
                                     <textarea id="body" class="form-control @error('body') is-invalid @enderror"
-                                              name="body" rows="5">{{ $article->body}}</textarea>
+                                              name="body" rows="5">{{old('body') ?? $article->body}}</textarea>
                                 @error('body')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -66,7 +66,7 @@
 
                             <div class="col-md-6">
                                 <input id="url" type="url"
-                                       class="form-control @error('url') is-invalid @enderror"  value="{{ $article->url }}" name="url">
+                                       class="form-control @error('url') is-invalid @enderror" value="{{old('url') ?? $article->url }}" name="url">
                                 @error('url')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

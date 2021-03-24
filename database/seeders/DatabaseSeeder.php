@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
 
         Note::factory(5)->has(User::factory())->create();
 
-        $article =  Article::factory()->has(Like::factory(2))->create();
+        $article =  Article::factory()->has(Like::factory())->create();
         $user->articles()->sync($article);
         $notes = Note::factory(5)->create(['article_id' => $article->id]);
         $user->notes()->sync($notes);
