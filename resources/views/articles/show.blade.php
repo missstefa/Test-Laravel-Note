@@ -41,6 +41,7 @@
                             </div>
                         </div>
 
+                        @can('update', $article)
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <a href="{{ route('articles.edit',['article' => $article]) }}">
@@ -50,6 +51,7 @@
                                 </a>
                             </div>
                         </div>
+                        @endcan
                         <br>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

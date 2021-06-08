@@ -14,13 +14,13 @@
                 @if(!$article->likedBy(auth()->user()))
                     <form action="{{ route('likes.store', $article->id) }}" method="post" class="mr-1">
                         @csrf
-                        <button type="submit" class="text-blue-500">Like</button>
+                        <input type="image" src=" {{ asset('images/lik.png') }}" alt="Submit" width="20" height="20">
                     </form>
                 @else
                     <form action="{{ route('likes.destroy', $article->id) }}" method="post" class="mr-1">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="text-blue-500">Unlike</button>
+                        <input type="image" src=" {{ asset('images/unlike.png') }}" alt="Submit" width="20" height="20">
                     </form>
                 @endif
 

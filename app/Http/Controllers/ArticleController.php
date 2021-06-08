@@ -34,9 +34,9 @@ class ArticleController extends Controller
         return view('articles.show', ['article' => $article]);
     }
 
-    public function edit(Article $article): view
+    public function edit(Article $article)
     {
-        return view('articles.edit', ['article' => $article]);
+            return view('articles.edit', ['article' => $article]);
     }
 
     public function update(Article $article, ArticleUpdateRequest $request): view

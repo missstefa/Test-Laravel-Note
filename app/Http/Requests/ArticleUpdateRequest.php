@@ -26,7 +26,7 @@ class ArticleUpdateRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:50'],
             'body' => ['string'],
-            'url' => ['url'],
+            'url' => ['nullable', 'url'],
             'meta' => ['json']
         ];
     }
