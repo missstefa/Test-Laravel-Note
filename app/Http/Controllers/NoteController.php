@@ -84,6 +84,9 @@ class NoteController extends Controller
 
     public function delete(Note $note)
     {
+
+       $this->imageService->deleteImage($note);
+
         $note->delete();
 
         return redirect('notes');
