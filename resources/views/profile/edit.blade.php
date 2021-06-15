@@ -26,7 +26,8 @@
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <label for="image"></label>
-                                            <input type="file" class="form-control-file" id="image" name="image" onchange="loadPreview(this);">
+                                            <input type="file" class="form-control-file" id="image" name="image"
+                                                   onchange="loadPreview(this);">
                                         </div>
                                     </div>
                                 </div>
@@ -35,7 +36,7 @@
                                 <label class="col-lg-3 col-form-label form-control-label">Full name</label>
                                 <div class="col-lg-9">
                                     <input class="form-control @error('full_name') is-invalid @enderror"
-                                           name="full_name" type="text" value="{{ $user->full_name }}">
+                                           id="full_name" name="full_name" type="text" value="{{old('full_name') ?? $user->full_name }}">
                                     @error('full_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -47,7 +48,7 @@
                                 <label class="col-lg-3 col-form-label form-control-label">Email</label>
                                 <div class="col-lg-9">
                                     <input class="form-control @error('email') is-invalid @enderror" name="email"
-                                           type="email" value="{{ $user->email }}">
+                                           type="email" value="{{old('email') ?? $user->email }}">
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -60,7 +61,7 @@
                                 <label class="col-lg-3 col-form-label form-control-label">Username</label>
                                 <div class="col-lg-9">
                                     <input class="form-control @error('name') is-invalid @enderror" name="name"
-                                           type="text" value="{{ $user->name }}">
+                                           type="text" value="{{old('name') ?? $user->name }}">
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

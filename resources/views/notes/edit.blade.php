@@ -34,7 +34,7 @@
                                 <label for="title" class="col-md-4  text-md-right">{{ __('Title') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="title" type="text" value="{{ $note->title}}"
+                                    <input id="title" type="text" value="{{old('title') ?? $note->title}}"
                                            class="form-control @error('title') is-invalid @enderror" name="title">
 
                                     @error('title')
@@ -51,7 +51,7 @@
 
                                 <div class="col-md-6">
                                     <textarea id="body" class="form-control @error('body') is-invalid @enderror"
-                                              name="body" rows="5">{{ $note->body}}</textarea>
+                                              name="body" rows="5">{{old('body') ?? $note->body}}</textarea>
                                     @error('body')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

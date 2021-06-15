@@ -26,7 +26,7 @@ class ArticleStoreRequest extends FormRequest
 
         return [
             'title' => ['required', 'string', 'max:50'],
-            'body' => ['nullable','string'],
+            'body' => ['required','nullable','string'],
             'url' => ['nullable','url'],
             'meta' => ['json']
         ];
